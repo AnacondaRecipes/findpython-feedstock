@@ -13,9 +13,8 @@ build:
   skip: True  # [py<37]
   script: {{ PYTHON }} -m pip install . -vv
   number: 0
-  # Not able to build locally with the following included:
-  # entry_points:
-  #   - findpython = "findpython.__main__:main"
+  entry_points:
+    - findpython = "findpython.__main__:main"
 
 requirements:
   host:
