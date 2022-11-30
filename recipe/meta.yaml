@@ -37,9 +37,13 @@ test:
 
 about:
   home: https://pypi.org/project/findpython/
+  description: A utility to find python versions on your system
   summary: A utility to find python versions on your system
   license: MIT
   license_file: LICENSE
+  license_family: MIT
+  dev_url: https://github.com/frostming/findpython
+  doc_url: https://github.com/frostming/findpython
 
 extra:
   recipe-maintainers:
