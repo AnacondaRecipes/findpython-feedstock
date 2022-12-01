@@ -10,20 +10,22 @@ source:
   sha256: 80557961c04cf1c8c4ba4ca3ac7cf76ec27fa92788a6af42cb701e3450c49430
 
 build:
-  noarch: python
+  skip: True  # [py<37]
   script: {{ PYTHON }} -m pip install . -vv
   number: 0
   entry_points:
-    - findpython = "findpython.__main__:main"
+    - findpython = findpython.__main__:main
 
 requirements:
   host:
     - pip
-    - python >=3.7
+    - python
     - pdm-pep517
+    - setuptools
+    - wheel
   run:
     - packaging >=20
-    - python >=3.7
+    - python
 
 test:
   imports:
@@ -35,9 +37,15 @@ test:
 
 about:
   home: https://pypi.org/project/findpython/
+  description: |
+    This library is a rewrite of pythonfinder project by @techalchemy. 
+    It simplifies the whole code structure while preserving most of the original features.
   summary: A utility to find python versions on your system
   license: MIT
   license_file: LICENSE
+  license_family: MIT
+  dev_url: https://github.com/frostming/findpython
+  doc_url: https://github.com/frostming/findpython/blob/main/README.md
 
 extra:
   recipe-maintainers:
