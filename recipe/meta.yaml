@@ -11,7 +11,7 @@ source:
 
 build:
   skip: true  # [py<38]
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
   entry_points:
     - findpython = findpython.__main__:main
@@ -22,20 +22,36 @@ requirements:
     - python
     - pdm-backend
   run:
-    - packaging >=20
     - python
+    - packaging >=20
     - platformdirs >=4.3.6
 
 test:
+  source_files:
+    - tests
   imports:
     - findpython
+    - findpython.finder
+    - findpython.providers
+    - findpython.providers.asdf
+    - findpython.providers.base
+    - findpython.providers.macos
+    - findpython.providers.path
+    - findpython.providers.pyenv
+    - findpython.providers.rye
+    - findpython.providers.uv
+    - findpython.providers.winreg
+    - findpython.python
+    - findpython.utils
   commands:
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
     - pip check
   requires:
     - pip
+    - pytest
 
 about:
-  home: https://pypi.org/project/findpython/
+  home: https://github.com/frostming/findpython
   description: |
     This library is a rewrite of pythonfinder project by @techalchemy.
     It simplifies the whole code structure while preserving most of the original features.
